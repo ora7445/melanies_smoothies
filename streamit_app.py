@@ -19,9 +19,6 @@ st.write('The name on your smoothi will be:', name_on_order)
 #
 # st.write('Your favorite fruit is:', Option)
 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-#st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(data=smoothiefroot_response.json())
 cnx = st.connection("snowflake")
 session = cnx.session()
 #session = get_active_session()
@@ -33,6 +30,10 @@ ingredients_list = st.multiselect(
      my_dataframe,
      max_selections=5
 )
+
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+sf_df = st.dataframe(data=smoothiefroot_response.json())
+
 if ingredients_list:
     ingredients_string =''
     for fruit_choosen in ingredients_list:
